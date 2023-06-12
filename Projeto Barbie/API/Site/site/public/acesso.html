@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BARBIE | SEJA BEM VINDO</title>
+  <link rel="stylesheet" href="css/acesso.css" />
+  <script src="js/funcoes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+
+</head>
+
+<body onload="obterDadosGrafico()">
+
+  <div class="janela">
+
+    <div class="logo">
+
+      <img src="assets/logo_branco.png" alt="">
+
+    </div>
+
+    <ul class="sidebar">
+
+      <li><a href="acesso.html">INÍCIO</a></li>
+      <li><a href="quiz.html">QUIZ</a></li>
+      <li><a href="login.html">SAIR</a></li>
+
+    </ul>
+  </div>
+
+
+  <div class="container">
+    <div class="grafico1">
+      <h1>PERSONAGEM FAVORITO</h1>
+      <canvas id="myChartCanvas1"></canvas>
+    </div>
+
+    <div class="grafico2">
+      <h1>FILME FAVORITO</h1>
+      <canvas id="myChartCanvas2"></canvas>
+    </div>
+  </div>
+
+ 
+
+</body>
+
+</html>
+
+<script>
+
+ 
+
+  let proximaAtualizacao;
+
+  window.onload = obterDadosGraficos();
+
+  function obterDadosGraficos() {
+    obterDadosGrafico(1),
+      obterDadosGrafico2(2)
+  }
+
+
+  function obterDadosGrafico(idUsuario) {
+
+    if (proximaAtualizacao != undefined) {
+      clearTimeout(proximaAtualizacao);
+    }
+
+    fetch(`/medidas/ultimas/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+          plotarGrafico(resposta, idUsuario);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+  // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+  // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
+  // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+  function plotarGrafico(resposta, idUsuario) {
+
+    console.log('iniciando plotagem do gráfico...');
+
+    // Criando estrutura para plotar gráfico - labels
+    let labels = [];
+
+    // Criando estrutura para plotar gráfico - dados
+    let dados = {
+      labels: labels,
+      datasets: [{
+        label: 'Personagem Favorito',
+        data: [],
+        fill: true,
+        borderColor: 'rgb(75, 192, 192)',
+        backgroundColor: `#F30073`,
+        tension: 0.1
+      }
+
+      ]
+    };
+
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    console.log(resposta)
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      labels.push(registro.NomePersonagem);
+      dados.datasets[0].data.push(registro.qtdEscolhido);
+      // dados.datasets[1].data.push(registro.qntPet);
+    }
+
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labels)
+    console.log('Dados:')
+    console.log(dados.datasets)
+    console.log('----------------------------------------------')
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+      type: 'bar',
+      data: dados,
+    };
+
+    // Adicionando gráfico criado em div na tela
+    let myChart = new Chart(
+      document.getElementById(`myChartCanvas1`),
+      config
+    );
+    // let myChart2 = new Chart(
+    //   document.getElementById(`myChartCanvas2`),
+    //   config
+    // );
+  }
+
+  function obterDadosGrafico2(idUsuario) {
+
+if (proximaAtualizacao != undefined) {
+  clearTimeout(proximaAtualizacao);
+}
+
+fetch(`/medidas/primeiras/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+  if (response.ok) {
+    response.json().then(function (resposta) {
+      console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+      plotarGrafico2(resposta, idUsuario);
+    });
+  } else {
+    console.error('Nenhum dado encontrado ou erro na API');
+  }
+})
+  .catch(function (error) {
+    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  });
+}
+
+// Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+// Configura o gráfico (cores, tipo, etc), materializa-o na página e,
+// A função *plotarGrafico* também invoca a função *atualizarGrafico*
+function plotarGrafico2(resposta, idUsuario) {
+
+console.log('iniciando plotagem do gráfico...');
+
+// Criando estrutura para plotar gráfico - labels
+let labels = [];
+
+// Criando estrutura para plotar gráfico - dados
+let dados = {
+  labels: labels,
+  datasets: [{
+    label: 'Filme Favorito',
+    data: [],
+    fill: true,
+    borderColor: 'rgb(75, 192, 192)',
+    backgroundColor: `#a70450`,
+    tension: 0.1
+  }]
+};
+
+console.log('----------------------------------------------')
+console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+console.log(resposta)
+
+// Inserindo valores recebidos em estrutura para plotar o gráfico
+for (i = 0; i < resposta.length; i++) {
+  var registro = resposta[i];
+  labels.push(registro.NomeFilme);
+  dados.datasets[0].data.push(registro.qtdEscolhido);
+  // dados.datasets[1].data.push(registro.qntPet);
+}
+
+console.log('----------------------------------------------')
+console.log('O gráfico será plotado com os respectivos valores:')
+console.log('Labels:')
+console.log(labels)
+console.log('Dados:')
+console.log(dados.datasets)
+console.log('----------------------------------------------')
+
+// Criando estrutura para plotar gráfico - config
+const config = {
+  type: 'bar',
+  data: dados,
+};
+let myChart2 = new Chart(
+  document.getElementById(`myChartCanvas2`),
+  config
+);
+}
+
+</script>
+ 

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BARBIE | QUIZ</title>
+    <link rel="stylesheet" href="css/teste.css" />
+    <script src="js/funcoes.js"></script>
+</head>
+
+<body>
+
+    <div class="janela">
+
+        <div class="logo">
+
+            <img src="assets/logo_branco.png" alt="">
+
+        </div>
+
+        <ul class="sidebar">
+
+            <li><a href="acesso.html">INÍCIO</a></li>
+            <li><a href="quiz.html">QUIZ</a></li>
+            <li><a href="index.html">SAIR</a></li>
+
+        </ul>
+    </div>
+
+    <div id="nextQuiz">
+        <div class="container_quiz">
+            <H1>QUIZ: BARBIE DREAMHOUSE</H1>
+            <h2>Descubra o quanto você conhece a série Barbie Life in the Dreamhouse</h2>
+            <div class="formulario">
+                <img src="assets/barbie_ken.jpg">
+                <div class="perguntas">
+                    <h1>QUAL O NOME DO NAMORADO DA BARBIE?</h1>
+                    <div class="respostas">
+                        <h2>KEN</h2>
+                        <h2>KENNY</h2>
+                        <h2>MAX STEEL</h2>
+                    </div>
+                    <div class="container_input">
+                        <h5>INFORME SUA RESPOSTA :</h5>
+                        <input type="text" id="ipt_alternativa1">
+                    </div>
+                    <div class="container_button">
+                        <button onclick="questao1()" class="button_quiz">PRÓXIMA PERGUNTA</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+</body>
+
+</html>
+
+
+<script>
+    var lista_questao1 = ['KEN', 'KENNY', 'MAX STEEL']
+    var lista_questao2 = ['TERESA', 'RAQUELLE', 'NIKKI']
+    var lista_questao3 = ['STACIE', 'SKIPPER', 'CHELSEA']
+    var lista_questao4 = ['CHORAR', 'RIR', 'DESMAIAR']
+    var lista_questao5 = ['MIDGE', 'ESTRELA', 'JOANA']
+
+    var pontuacao = 0
+
+    function questao1() {
+
+        var resposta1 = ipt_alternativa1.value.toUpperCase();
+
+        if (resposta1 == lista_questao1[0]) {
+
+            pontuacao = pontuacao + 20
+
+            nextQuiz.innerHTML = `<div class="container_quiz">
+            <H1>QUIZ: BARBIE DREAMHOUSE</H1>
+            <h2>Descubra o quanto você conhece a série Barbie Life in the Dreamhouse</h2>
+            <div class="formulario">
+                <img src="assets/raquelle_dreamhouse.jpg">
+                <div class="perguntas">
+                    <h1>QUAL PERSONAGEM TENTA SABOTAR A BARBIE?</h1>
+                    <div class="respostas">
+                    <h2>TERESA</h2>
+                    <h2>RAQUELLE</h2>
+                    <h2>NIKKI</h2>
+                </div>
+                <div class="container_input">
+                  <h5>INFORME SUA RESPOSTA :</h5>
+                    <input type="text" id="ipt_alternativa2">
+                </div>
+                    <div class="container_button">
+                    <button onclick="questao2()" class="button_quiz">PRÓXIMA PERGUNTA</button>
+                </div>
+                </div>
+            </div>
+
+        </div>`}
+
+        else if (resposta1 == lista_questao1[1] || resposta1 == lista_questao1[2]) {
+
+            pontuacao = pontuacao + 0
+
+            nextQuiz.innerHTML = `<div class="container_quiz">
+            <H1>QUIZ: BARBIE DREAMHOUSE</H1>
+            <h2>Descubra o quanto você conhece a série Barbie Life in the Dreamhouse</h2>
+            <div class="formulario">
+                <img src="assets/raquelle_dreamhouse.jpg">
+                <div class="perguntas">
+                    <h1>QUAL PERSONAGEM TENTA SABOTAR A BARBIE?</h1>
+                    <div class="respostas">
+                    <h2>TERESA</h2>
+                    <h2>RAQUELLE</h2>
+                    <h2>NIKKI</h2>
+                </div>
+                <div class="container_input">
+                  <h5>INFORME SUA RESPOSTA :</h5>
+                    <input type="text" id="ipt_alternativa2">
+                </div>
+                    <div class="container_button">
+                    <button onclick="questao2()" class="button_quiz">PRÓXIMA PERGUNTA</button>
+                </div>
+                </div>
+            </div>
+
+        </div>`}
+
+        else if (resposta1 != lista_questao1.length) {
+            alert(`INSIRA UMA RESPOSTA VÁLIDA`)
+        }
+
+
+    }
+
+    function questao2() {
+        var resposta2 = ipt_alternativa2.value.toUpperCase();
+
+        if (resposta2 == lista_questao2[1]) {
+
+            pontuacao = pontuacao + 20
+
+            nextQuiz.innerHTML = `<div class="container_quiz">
+    <H1>QUIZ: BARBIE DREAMHOUSE</H1>
+    <h2>Descubra o quanto você conhece a série Barbie Life in the Dreamhouse</h2>
+    <div class="formulario">
+        <img src="assets/irmas_barbie.jpg">
+        <div class="perguntas">
+            <h1>QUAL O NOME DA IRMÃ MAIS NOVA DA BARBIE?</h1>
+            <div class="respostas">
+            <h2>STACIE</h2>
+            <h2>SKIPPER</h2>
+            <h2>CHELSEA</h2>
+        </div>
+        <div class="container_input">
+          <h5>INFORME SUA RESPOSTA :</h5>
+            <input type="text" id="ipt_alternativa3">
+        </div>
+            <div class="container_button">
+            <button onclick="questao3()" class="button_quiz">PRÓXIMA PERGUNTA</button>
+        </div>
+        </div>
+    </div>
+
+</div>`}
+
+        else if (resposta2 == lista_questao2[0] || resposta2 == lista_questao2[2]) {
+
+            pontuacao = pontuacao + 0
+
+            nextQuiz.innerHTML = `<div class="container_quiz">
+    <H1>QUIZ: BARBIE DREAMHOUSE</H1>
+    <h2>Descubra o quanto você conhece a série Barbie Life in the Dreamhouse</h2>
+    <div class="formulario">
+        <img src="assets/irmas_barbie.jpg">
+        <div class="perguntas">
+            <h1>QUAL O NOME DA IRMÃ MAIS NOVA DA BARBIE?</h1>
+            <div class="respostas">
+            <h2>STACIE</h2>
+            <h2>SKIPPER</h2>
+            <h2>CHELSEA</h2>
+        </div>
+        <div class="container_input">
+          <h5>INFORME SUA RESPOSTA :</h5>
+            <input type="text" id="ipt_alternativa3">
+        </div>
+            <div class="container_button">
+            <button onclick="questao3()" class="button_quiz">PRÓXIMA PERGUNTA</button>
+        </div>
+        </div>
+    </div>
+
+</div>`}
+
+        else if (resposta2 != lista_questao2.length) {
+            alert(`INSIRA UMA RESPOSTA VÁLIDA`)
+        }
+
+
+    }
+
+    function questao3() {
+        var resposta3 = ipt_alternativa3.value.toUpperCase();
+
+        if (resposta3 == lista_questao3[2]) {
+
+            pontuacao = pontuacao + 20
+
+            nextQuiz.innerHTML = `<div class="container_quiz">
+    <H1>QUIZ: BARBIE DREAMHOUSE</H1>
+    <h2>Descubra o quanto você conhece a série Barbie Life in the Dreamhouse</h2>
+    <div class="formulario">
+        <img src="assets/ken_dreamhouse.gif">
+        <div class="perguntas">
+            <h1>No episódio "cachorrinhos demais"qual era a reação toda vez que o Ken via os cachorrinhos?</h1>
+            <div class="respostas">
+            <h2>CHORAR</h2>
+            <h2>RIR</h2>
+            <h2>DESMAIAR</h2>
+        </div>
+        <div class="container_input">
+          <h5>INFORME SUA RESPOSTA :</h5>
+            <input type="text" id="ipt_alternativa4">
+        </div>
+            <div class="container_button">
+            <button onclick="questao4()" class="button_quiz">PRÓXIMA PERGUNTA</button>
+        </div>
+        </div>
+    </div>
+
+</div>`}
+
+        else if (resposta3 == lista_questao3[0] || resposta3 == lista_questao3[1]) {
+
+            pontuacao = pontuacao + 0
+
+            nextQuiz.innerHTML = `<div class="container_quiz">
+    <H1>QUIZ: BARBIE DREAMHOUSE</H1>
+    <h2>Descubra o quanto você conhece a série Barbie Life in the Dreamhouse</h2>
+    <div class="formulario">
+        <img src="assets/ken_dreamhouse.gif">
+        <div class="perguntas">
+            <h1>No episódio "cachorrinhos demais"qual era a reação toda vez que o Ken via os cachorrinhos?</h1>
+            <div class="respostas">
+            <h2>CHORAR</h2>
+            <h2>RIR</h2>
+            <h2>DESMAIAR</h2>
+        </div>
+        <div class="container_input">
+          <h5>INFORME SUA RESPOSTA :</h5>
+            <input type="text" id="ipt_alternativa4">
+        </div>
+            <div class="container_button">
+            <button onclick="questao4()" class="button_quiz">PRÓXIMA PERGUNTA</button>
+        </div>
+        </div>
+    </div>
+
+</div>`}
+
+        else if (resposta3 != lista_questao3.length) {
+            alert(`INSIRA UMA RESPOSTA VÁLIDA`)
+        }
+
+    }
+
+    function questao4() {
+        var resposta4 = ipt_alternativa4.value.toUpperCase();
+
+        if (resposta4 == lista_questao4[2]) {
+
+            pontuacao = pontuacao + 20
+
+            nextQuiz.innerHTML = `<div class="container_quiz">
+    <H1>QUIZ: BARBIE DREAMHOUSE</H1>
+    <h2>Descubra o quanto você conhece a série Barbie Life in the Dreamhouse</h2>
+    <div class="formulario">
+        <img src="assets/midge.jpg">
+        <div class="perguntas">
+            <h1>QUAL O NOME DA AMIGA DE WILLOWS DA BARBIE?</h1>
+            <div class="respostas">
+            <h2>MIDGE</h2>
+            <h2>ESTRELA</h2>
+            <h2>JOANA</h2>
+        </div>
+        <div class="container_input">
+          <h5>INFORME SUA RESPOSTA :</h5>
+            <input type="text" id="ipt_alternativa5">
+        </div>
+            <div class="container_button">
+            <button onclick="questao5()" class="button_quiz">FINALIZAR</button>
+        </div>
+        </div>
+    </div>
+
+</div>`}
+
+        else if (resposta4 == lista_questao4[0] || resposta4 == lista_questao4[1]) {
+
+            pontuacao = pontuacao + 0
+
+            nextQuiz.innerHTML = `<div class="container_quiz">
+    <H1>QUIZ: BARBIE DREAMHOUSE</H1>
+    <h2>Descubra o quanto você conhece a série Barbie Life in the Dreamhouse</h2>
+    <div class="formulario">
+        <img src="assets/midge.jpg">
+        <div class="perguntas">
+            <h1>QUAL O NOME DA AMIGA DE WILLOWS DA BARBIE?</h1>
+            <div class="respostas">
+            <h2>MIDGE</h2>
+            <h2>ESTRELA</h2>
+            <h2>JOANA</h2>
+        </div>
+        <div class="container_input">
+          <h5>INFORME SUA RESPOSTA :</h5>
+            <input type="text" id="ipt_alternativa5">
+        </div>
+            <div class="container_button">
+            <button onclick="questao5()" class="button_quiz">FINALIZAR</button>
+        </div>
+        </div>
+    </div>
+
+</div>`}
+
+        else if (resposta4 != lista_questao4.length) {
+            alert(`INSIRA UMA RESPOSTA VÁLIDA`)
+        }
+    }
+
+    function questao5() {
+        var resposta5 = ipt_alternativa5.value.toUpperCase();
+
+        if (resposta5 == lista_questao5[0]) {
+
+            pontuacao = pontuacao + 20
+
+            nextQuiz.innerHTML = `<div class="container_quiz">
+    <H1>QUIZ: BARBIE DREAMHOUSE</H1>
+    <h2>Descubra o quanto você conhece a série Barbie Life in the Dreamhouse</h2>
+    <div class="formulario">
+        <img src="assets/barbie_beijo.jpg">
+        <div class="perguntas">
+            <h1>SUA PONTUAÇÃO FOI DE ${pontuacao} <br><br> GABARITO:<br><br>
+                QUESTÃO 1 - R: KEN <br>
+                QUESTÃO 2 - R: RAQUELLE <br>
+                QUESTÃO 3 - R: CHELSEA <br>
+                QUSTÃO 4 - R: DESMAIAR <br>
+                QUESTÃO 5 - R: MIDGE
+</h1>
+
+        </div>
+    </div>
+
+</div>`}
+
+        else if (resposta5 == lista_questao5[1] || resposta5 == lista_questao5[2]) {
+
+            pontuacao = pontuacao + 0
+
+            nextQuiz.innerHTML = `<div class="container_quiz">
+    <H1>QUIZ: BARBIE DREAMHOUSE</H1>
+    <h2>Descubra o quanto você conhece a série Barbie Life in the Dreamhouse</h2>
+    <div class="formulario">
+        <img src="assets/barbie_beijo.jpg">
+        <div class="perguntas">
+            <h1>SUA PONTUAÇÃO FOI DE ${pontuacao} <br><br> GABARITO:<br><br>
+                QUESTÃO 1 - R: KEN <br>
+                QUESTÃO 2 - R: RAQUELLE <br>
+                QUESTÃO 3 - R: CHELSEA <br>
+                QUSTÃO 4 - R: DESMAIAR <br>
+                QUESTÃO 5 - R: MIDGE
+
+
+                  </h1>
+
+        </div>
+    </div>
+
+</div>`}
+
+        else if (resposta4 != lista_questao4.length) {
+            alert(`INSIRA UMA RESPOSTA VÁLIDA`)
+        }
+    }
+</script>

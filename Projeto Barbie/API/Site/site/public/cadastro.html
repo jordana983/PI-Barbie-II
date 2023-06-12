@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastre-se</title>
+    <link rel="stylesheet" href="css/cadastro.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="navbar1">
+                <li><a href="index.html" class="home">HOME</a></li>
+                <li><a href="sobre.html">SOBRE</a></li>
+                <li><a href="">CURIOSIDADES</a></li>
+            </ul>
+            <div class="logo">
+                <img src="assets//logo_branco.png" alt="">
+            </div>
+            <ul class="navbar2">
+                <li><a href="cadastro.html">CADASTRO</a></li>
+                <li><a href="login.html">LOGIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container-cadastro">
+        <div class="caixa-formulario">
+            <img src="assets//imagem1_cadastro.jpg">
+
+            <div class="formulario">
+                <h1>SEJA BEM VINDO!</h1>
+                <label>Nome:</label>
+                <input id="ipt_nome">
+                <label>Sobrenome:</label>
+                <input id="ipt_sobrenome">
+                <label>E-mail:</label>
+                <input id="ipt_email" type="email">
+                <label>Senha:</label>
+                <input class='ipt_senha' id="ipt_senha" type="password">
+                <label>Confirme sua senha :</label>
+                <input class="ipt_ConfirmacaoSenha" id="ipt_confirmacaoSenha" type="password">
+            </div>
+
+                <div class="formulario2">
+                <label>Selecione dentre as opções, seu filme favorito:</label><br>
+                <select name="Filme Favorito" id="filmefavorito">
+                    <option value="1">Barbie Escola de Princesas</option>
+                    <option value="2">Barbie e o Castelo de Diamantes</option>
+                    <option value="3">Barbie em Vida de Sereia </option>
+                    <option value="4">Barbie em a Princesa e a Plebéia</option>
+                    <option value="5">Barbie e as Doze Princesas Bailarinas</option>
+                </select><br>
+
+                <label>Selecione seu personagem favorito:</label><br>
+                <select name="Personagem Favorito" id="personagemfavorito">
+                    <option value="1">Barbie</option>
+                    <option value="2">Ken</option>
+                    <option value="3">Raquelle </option>
+                    <option value="4">Nikki</option>
+                    <option value="5">Teresa</option>
+                    <option value="6">Ryan</option>
+                </select>
+           
+                <div class="container1">
+                    <button onclick="cadastrar()">CADASTRAR</button>
+                </div>
+                </div>
+            
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
+
+<script>
+    function cadastrar() {
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = ipt_nome.value;
+        var sobrenomeVar = ipt_sobrenome.value;
+        var emailVar = ipt_email.value;
+        var senhaVar = ipt_senha.value;
+        var confirmacaoSenhaVar = ipt_confirmacaoSenha.value;
+        var filmeVar = filmefavorito.value
+        var personagemVar = personagemfavorito.value
+
+        if (nomeVar == "" || sobrenomeVar == '' || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "" || filmeVar == "" || personagemVar == ""  ) {
+            // cardErro.style.display = "block"
+            return alert (`Os campos precisam ser preenchidos corretamente!`);
+
+            // finalizarAguardar();
+            return;
+        }
+        if (confirmacaoSenhaVar != senhaVar) {
+            return alert(`Senhas não conferem!`)
+
+        }
+        // else {
+        //     setInterval(sumirMensagem, 5000)
+        // }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                sobrenomeServer: sobrenomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                filmeServer : filmeVar,
+                personagemServer : personagemVar
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                //cardErro.style.display = "block";
+
+                // mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso',
+                    text: 'Cadastro Realizado com Sucesso!',
+                    
+                }).then(() => {
+                    window.location = "login.html";
+                })
+
+                // limparFormulario();
+                // finalizarAguardar();
+            } else {
+                // alert(`Houve um erro ao tentar realizar o cadastro!`)
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    // function sumirMensagem() {
+    //     cardErro.style.display = "none"
+    // }
+</script>
